@@ -34,8 +34,18 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
-- task: PublishPipelineArtifact@1
+
+
+- task: ArchiveFiles@2
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifactType: 'pipeline'
-    artifactName: 'drop'
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
