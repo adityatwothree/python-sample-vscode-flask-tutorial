@@ -10,12 +10,12 @@ pool:
   vmImage: ubuntu-latest
 strategy:
   matrix:
-    Python27:
-      python.version: '2.7'
-    #Python35:
-    #  python.version: '3.5'
-    Python36:
-      python.version: '3.6'
+    # Python27:
+    #   python.version: '2.7'
+    # #Python35:
+    # #  python.version: '3.5'
+    # Python36:
+    #   python.version: '3.6'
     Python37:
       python.version: '3.7'
 
@@ -35,10 +35,3 @@ steps:
     pytest
   displayName: 'pytest'
 - task: PublishBuildArtifacts@1
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'CSS MCP 4 (78871755-786f-416d-ae2a-b929d52fc4e4)'
-    appType: 'webApp'
-    appName: 'App1'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    deploymentMethod: 'auto'
